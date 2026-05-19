@@ -82,3 +82,21 @@ export const getSettings = () => {
 export const saveSettings = (settings) => {
   localStorage.setItem(KEYS.SETTINGS, JSON.stringify(settings));
 };
+// Request notification permission
+export const requestNotificationPermission = async () => {
+  if ('Notification' in window) {
+    const permission = await Notification.requestPermission();
+    return permission === 'granted';
+  }
+  return false;
+};
+
+// Send notification
+export const sendNotification = (title, body) => {
+  if (Notification.permission === 'granted') {
+    new Notification(title, {
+      body,
+      icon: '/android-chrome-192x192.png'
+    });
+  }
+};

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getBudgets, saveBudget, deleteBudget, getExpenses } from '../utils/storage';
+import { getBudgets, saveBudget, deleteBudget, getExpenses, requestNotificationPermission, sendNotification } from '../utils/storage';
 import toast from 'react-hot-toast';
 
 const CATEGORIES = [
@@ -30,28 +30,19 @@ export default function Budget() {
     return { ...b, spent, remaining: b.amount - spent, percentage };
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     saveBudget({ ...form, amount: parseFloat(form.amount), alertThreshold: parseInt(form.alertThreshold), month, year });
     toast.success(editBudget ? 'Budget updated' : 'Budget set');
+    await requestNotificationPermission();
+    monthBudgets.forEach(b => {
+      if (b.percentage >= b.alertThreshold) {
+        sendNotification('⚠️ Budget Alert!', `${b.category} budget ${b.percentage}% use ho gaya!`);
+      }
+    });
     setShowModal(false);
     refresh();
   };
-
-  const handleDelete = (id) => {
-    if (!window.confirm('Delete this budget?')) return;
-    deleteBudget(id);
-    toast.success('Budget deleted');
-    refresh();
-  };
-
-  const openAdd = () => { setForm({ category: 'Food & Dining', amount: '', alertThreshold: 80 }); setEditBudget(null); setShowModal(true); };
-  const openEdit = (b) => { setForm({ category: b.category, amount: b.amount, alertThreshold: b.alertThreshold }); setEditBudget(b); setShowModal(true); };
-  const f = (n) => `₹${(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-
-  const totalBudget = monthBudgets.reduce((a, b) => a + b.amount, 0);
-  const totalSpent = monthBudgets.reduce((a, b) => a + b.spent, 0);
-
   return (
     <div>
       <div className="page-header">
