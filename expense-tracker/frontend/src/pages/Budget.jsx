@@ -43,6 +43,29 @@ export default function Budget() {
     setShowModal(false);
     refresh();
   };
+  const handleDelete = (id) => {
+    if (!window.confirm('Delete this budget?')) return;
+    deleteBudget(id);
+    toast.success('Budget deleted');
+    refresh();
+  };
+
+  const openAdd = () => { 
+    setForm({ category: 'Food & Dining', amount: '', alertThreshold: 80 }); 
+    setEditBudget(null); 
+    setShowModal(true); 
+  };
+  
+  const openEdit = (b) => { 
+    setForm({ category: b.category, amount: b.amount, alertThreshold: b.alertThreshold }); 
+    setEditBudget(b); 
+    setShowModal(true); 
+  };
+  
+  const f = (n) => `₹${(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+
+  const totalBudget = monthBudgets.reduce((a, b) => a + b.amount, 0);
+  const totalSpent = monthBudgets.reduce((a, b) => a + b.spent, 0);
   return (
     <div>
       <div className="page-header">
