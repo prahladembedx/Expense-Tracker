@@ -119,7 +119,7 @@ Data persists even after browser refresh
 
 ---
 
-## 📜 License & Copyright
+## 📜 License
 
 ```
 Copyright (c) 2026 prahladembedx. All Rights Reserved.
@@ -137,8 +137,12 @@ feel free to reach out! 🙂
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 GitHub  : https://github.com/prahladembedx
-Project : https://prahladembedx.github.io/Expense-Tracker/
+AUTHOR : prahladembedx
 
-        "Built with passion, protected with purpose."
-                   AUTHOR : prahladembedx
 ```
+
+<div align="center">
+
+⭐ Star this repo if you found it helpful!
+
+</div>
