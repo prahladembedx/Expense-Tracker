@@ -126,9 +126,7 @@ Copyright (c) 2026 prahladembedx. All Rights Reserved.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-This project is publicly visible for inspiration and
-learning purposes only. Copying, redistribution, or
-commercial use of this project without written permission
+This project is publicly visible for learning purposes only. Copying, redistribution, or commercial use of this project without written permission
 from the author is not allowed.
 
 If you'd like to collaborate or have any questions,
